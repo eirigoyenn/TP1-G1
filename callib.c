@@ -40,18 +40,20 @@ parseCmdLine(int argc, char *argv[],pCallback (p), void *userData)
     for(i = 1; i < argc; i++)
     {
         if((*(argv[i]) == '-')&&(*((argv[i])+1)== '\0'))        //Error de tipo 2.
-        {                                                       //Encontro opción con clave vacía.
+        {   
+            printf("ERROR TIPO 2:opcion sin clave\n");                                                   //Encontro opciï¿½n con clave vacï¿½a.
             result=-EXIT_FAILURE;
             i=argc;
         }
         else if((*(argv[i]) == '-')&&( argv[i+1] == NULL))      //Error de tipo 1.
-        {                                                       //Encontro opción sin valor.
+        {    
+             printf("ERROR TIPO 1:opcion sin valor\n");                               //Encontro opciï¿½n sin valor.
             result=-EXIT_FAILURE;
             i=argc;
         }
-        else if((*(argv[i]) == '-')&&(argv[i] != NULL))         //Encontro opción.
+        else if((*(argv[i]) == '-')&&(argv[i] != NULL))         //Encontro opciï¿½n.
         {   
-            clave=argv[i++];                                    //Avanza dos(este más el del for())
+            clave=argv[i++];                                    //Avanza dos(este mï¿½s el del for())
             valor=argv[i];
             
             valid=p(clave+1,valor,((args_t*)userData)+result);  //Llama al callback y le pasa el userdata donde guardar
@@ -61,10 +63,10 @@ parseCmdLine(int argc, char *argv[],pCallback (p), void *userData)
                 }                                               //si callback devuelve 0 hubo un error entonces corto
             result++;
         }
-        else                                                    //Encuentra un parámetro.
+        else                                                    //Encuentra un parï¿½metro.
         {   
             valor=argv[i];
-            valid=p(NULL,valor,((args_t*)userData)+result);      //Hace lo mismo que con opciones pero aplicado a parámetros.
+            valid=p(NULL,valor,((args_t*)userData)+result);      //Hace lo mismo que con opciones pero aplicado a parï¿½metros.
             
                 if (!valid){
                     i=argc;
